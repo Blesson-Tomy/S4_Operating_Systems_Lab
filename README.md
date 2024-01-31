@@ -1,9 +1,9 @@
 
-BASIC LINUX COMMANDS
+#BASIC LINUX COMMANDS#
 
-Aim: To implement basic linux commands
+##Aim: To implement basic linux commands##
 
-Commands:
+##Commands:##
 
 Command 1: pwd
 
