@@ -81,7 +81,7 @@ Syntax: clear
 
 The command in Linux is generally used as a prefix for some commands that only superusers are allowed to run. If you prefix any command with “sudo”, it will run that command with elevated privileges or in other words allow a user with proper permissions to execute a command as another user, such as the superuser.
 
-Syntax: sudo
+Syntax: sudo <command>
 
 
 ### Command 12: cat
@@ -95,7 +95,7 @@ Syntax: cat [OPTION]... [FILE]..
 
 An interface to the system reference manuals.
 
-Syntax: man
+Syntax: man <command>
 
 
 ### Command 14: uname
@@ -123,7 +123,7 @@ Syntax: rm <name>
 
 The rmdir command removes the directory, specified by the Directory parameter, from the system. The directory must be empty before you can remove it, and you must have write permission in its parent directory.
 
-Syntax: rmdir
+Syntax: rmdir <name>
 
 
 ### Command 18: cp
