@@ -130,3 +130,5 @@ Syntax: rmdir <name>
 Copy from one file to another.
 Syntax: cp <source_file> <destination>
 
+LAST UPDATED ON: 1 February 2024
+
