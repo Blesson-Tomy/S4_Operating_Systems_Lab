@@ -35,7 +35,7 @@ Syntax: echo <text>
 
 ### Command 5: mkdir
 
-This command helps us move some data, usually text into a file.
+This command is used to create a new directory.
 
 Syntax: mkdir <filename>
 
