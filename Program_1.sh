@@ -1,3 +1,4 @@
+#Write a program to display your Name, Semester, Batch, Roll Number and Register Number.
 echo "Enter your Name:"
 read Name
 echo "Enter your Semester:"
