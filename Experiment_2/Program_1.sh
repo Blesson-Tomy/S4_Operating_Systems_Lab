@@ -8,7 +8,7 @@ read Batch
 echo "Enter your Roll Number:"
 read Rollno
 
-echo Name: $Name
-echo "Semester: "$Semester
-echo "Batch: "$Batch
-echo "Roll Number: "$Rollno
+echo "Name: " $Name
+echo "Semester: " $Semester
+echo "Batch: " $Batch
+echo "Roll Number: " $Rollno
