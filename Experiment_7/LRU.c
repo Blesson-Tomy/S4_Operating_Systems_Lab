@@ -55,7 +55,7 @@ printf("\n\n\tPress any key to continue.");
 void main()
 {
 int x;
-//freopen("in.cpp","r",stdin);
+
 while(1)
 {
 printf("\n\n\t-----MENU---- ");
