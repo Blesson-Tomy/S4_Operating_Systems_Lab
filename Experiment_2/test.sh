@@ -51,6 +51,22 @@ case $op in
         echo "$i"
     done
     ;;
+
+5) 
+    echo "Program to find the factorial of a given number"
+    echo "Enter the number: "
+    read n
+
+    fact=1 
+
+    for((i=1;i<=n;i++))
+    do
+        fact=$(($fact*$i))
+    done
+    echo "The factorial of $n is $fact."
+    ;;
+
+
 *)
     echo "Invalid input. Please try again."
     ;;
