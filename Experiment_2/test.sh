@@ -66,6 +66,21 @@ case $op in
     echo "The factorial of $n is $fact."
     ;;
 
+6)
+    echo "Program to find the fibonacci series of n numbers."
+    echo "Read the value of n"
+    read n
+    x=1
+    y=2
+    for((i=0;i<n;i++))
+    do
+        echo "$x"
+        f=$(($x+$y))
+        x=$y
+        y=$f
+    done
+    ;;
+
 
 *)
     echo "Invalid input. Please try again."
