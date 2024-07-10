@@ -1,6 +1,4 @@
 //This program is to call the first program using the second program.
-
-
 //FIRST PROGRAM
 #include<stdio.h>
 #include<unistd.h>
@@ -29,4 +27,5 @@ int main()
 	return 0;
 }
 
-
+//command to execute
+// gcc first.c -o EXEC
