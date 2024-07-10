@@ -8,9 +8,9 @@
 
 echo "Welcome to the program. Choose between number 1 - 7."
 echo "Enter the number:"
-read n
+read op
 
-case $n in
+case $op in
 
 1) 
     echo "Program to print your Name, Semester, Rollno"
@@ -19,8 +19,40 @@ case $n in
     echo "Enter Semester"
     read S
     echo "Enter Rollno"
-    Read R
+    read R
     echo "The name of the student is $N of semester $S. The rollno is $R."
     ;;
 2)
-    echo "Program to display the sum of 2 Numbers"
+    echo "Program to display the sum of n Numbers"
+    echo "Enter the 2 numbers:"
+    read n1
+    read n2
+    sum=$(($n1+$n2))
+    echo "The sum of $n1 and $n2 is $sum."
+    ;;
+
+3)  echo "Program to find the greatest among two numbers"
+    echo "Enter the 2 numbers:"
+    read n1
+    read n2
+    if (($n1>$n2))
+    then 
+        echo "$n1 is the greatest number."
+
+    else    
+        echo "$n2 is the greatest number."
+    fi
+    ;;
+
+4) 
+    echo "Program to display the first 10 natural numbers."
+    for((i=0;i<=10;i++))
+    do
+        echo "$i"
+    done
+    ;;
+*)
+    echo "Invalid input. Please try again."
+    ;;
+
+esac
