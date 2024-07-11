@@ -61,3 +61,4 @@ void consumer()
     printf("\n consumer consumes item%d",x); 
     x--; 
     mutex=signal(mutex); 
+}
