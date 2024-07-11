@@ -1,67 +1,64 @@
-#include<stdio.h>
-struct process
-{
-    int ps;
-    int flag;
-} p[50];
+#include <stdio.h>
 
-struct sizes
-{
+struct process {
+    int p;
+    int flag;
+} ps[10];
+
+struct size {
     int size;
     int alloc;
-}s[5];
-int main()
-{
-    int i=0,np=0,n=0,j=0, max=0,index;
-    printf("\n Worst fit");
-    printf("\n");
+} bs[10];
 
-    printf("enter the number of blocks \t");
-    scanf("%d",&n);
-    printf("\t\t\n enter the size for %d blocks\n",n);
-    for(i=0;i<n;i++)
-    {
-        printf("enter the size for %d block \t",i);
-        scanf("%d",&s[i].size);
+int main() {
+    int np, nb;
+
+    printf("Enter the number of processes: ");
+    scanf("%d", &np);
+
+    printf("Enter the size of processes:\n");
+    for (int i = 0; i < np; i++) {
+        printf("Process %d: ", i);
+        scanf("%d", &ps[i].p);
+        ps[i].flag = 0; // Initialize the flag as not allocated
     }
-    printf("\n enter the number of process\t",i);
-    scanf("%d",&np);
-    printf("enter the size of %d processors !\t",np);
-    printf("\n");
-    for(i=0;i<np;i++)
-    {
-        printf("enter the size of process %d\t",i);
-        scanf("\n%d",&p[i].ps);
+
+    printf("Enter the number of memory blocks: ");
+    scanf("%d", &nb);
+
+    printf("Enter the size of memory blocks:\n");
+    for (int i = 0; i < nb; i++) {
+        printf("Block %d: ", i);
+        scanf("%d", &bs[i].size);
+        bs[i].alloc = 0; // Initialize the alloc as not allocated
     }
-    printf("\n\t\t Allocation of blocks using first fit is as follows\n");
-    printf("\n\t\t process \t process size\t blocks\n");
-    for(i=0;i<np;i++)
-    {
-        max=0;
-        for(j=0;j<n;j++)
-        {
-            if(s[j].alloc!=1)
-            {
-                if (max<s[j].size)
-                {
-                    max=s[j].size;
-                    index=j;
+
+    printf("\nWorst Fit:\n");
+    printf("Process ID\tProcess Size\tBlock Size\n");
+
+    // Worst Fit allocation
+    for (int i = 0; i < np; i++) {
+        int worstIndex = -1;
+        for (int j = 0; j < nb; j++) {
+            if (bs[j].alloc == 0 && ps[i].p <= bs[j].size) {
+                if (worstIndex == -1 || bs[j].size > bs[worstIndex].size) {
+                    worstIndex = j;
                 }
             }
         }
-        if(p[i].flag!=1)
-        {
-            if(p[i].ps<=s[index].size)
-            {
-                p[i].flag=1;
-                s[index].alloc=1;
-            }
+        if (worstIndex != -1) {
+            ps[i].flag = 1; // Mark the process as allocated
+            bs[worstIndex].alloc = 1; // Mark the block as allocated
+            printf("%d\t\t%d\t\t%d\n", i, ps[i].p, bs[worstIndex].size);
         }
-        printf("\n\t\t %d\t\t\t%d\t%d\t",i,p[i].ps,s[index].size);
     }
-    for(i=0;i<np;i++)
-    {
-        if(p[i].flag!=1)
-            printf("sorry !!!!!!!process %d must wait as there is no sufficient memory",i);
+
+    // Check for processes that couldn't be allocated
+    for (int i = 0; i < np; i++) {
+        if (ps[i].flag != 1) {
+            printf("Process %d is not successfully allocated.\n", i);
+        }
     }
+
+    return 0;
 }

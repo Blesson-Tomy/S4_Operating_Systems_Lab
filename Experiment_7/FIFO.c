@@ -11,6 +11,7 @@ int main()
     scanf("%d",&no);
     for(i=0;i<no;i++)
         frame[i]=-1;
+        
     j=0;
     printf("\tref string\t page frmaes\n");
     for(i=1;i<=n;i++)

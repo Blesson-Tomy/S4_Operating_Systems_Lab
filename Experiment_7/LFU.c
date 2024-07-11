@@ -2,7 +2,7 @@
 
 int main() {
     int i, j, n, a[50], frame[10], no, k, avail, count = 0;
-    int time[10], pos;
+    int freq[10], minFreq, pos;
 
     // Input for number of pages
     printf("\nEnter the number of pages:\n");
@@ -17,13 +17,13 @@ int main() {
     printf("\nEnter the number of frames:\n");
     scanf("%d", &no);
 
-    // Initialize all frames to -1 (empty) and time array to 0
+    // Initialize all frames to -1 (empty) and frequency array to 0
     for (i = 0; i < no; i++) {
         frame[i] = -1;
-        time[i] = 0;
+        freq[i] = 0;
     }
 
-    // Start LRU Page Replacement
+    // Start LFU Page Replacement
     j = 0;
     printf("\tRef string\tPage frames\n");
 
@@ -36,7 +36,7 @@ int main() {
         for (k = 0; k < no; k++) {
             if (frame[k] == a[i]) {
                 avail = 1; // Page is available
-                time[k] = i; // Update the time of the page
+                freq[k]++; // Increment the frequency of the page
                 printf("hit");
                 break;
             }
@@ -44,16 +44,19 @@ int main() {
 
         // If page is not available (page fault)
         if (avail == 0) {
-            // Find the LRU page position
+            // Find the LFU page position
+            minFreq = freq[0];
             pos = 0;
             for (k = 1; k < no; k++) {
-                if (time[k] < time[pos])
+                if (freq[k] < minFreq) {
+                    minFreq = freq[k];
                     pos = k;
+                }
             }
 
             // Replace frame with current page
             frame[pos] = a[i];
-            time[pos] = i; // Update time of the page
+            freq[pos] = 1; // Reset frequency of the new page
             count++; // Increment page fault count
 
             for (k = 0; k < no; k++) {

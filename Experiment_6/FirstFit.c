@@ -1,65 +1,62 @@
 #include<stdio.h>
-struct process
-{
+struct process {
     int ps;
-    int flag;
+    int flag; // 0 for not allocated, 1 for allocated
 } p[50];
-struct sizes
-{
+
+struct sizes {
     int size;
-    int alloc;
-}s[5];
+    int alloc; // 0 for not allocated, 1 for allocated
+} s[5];
 
-int i=0,np=0,n=0,j=0;
+int n, np;
 
-int main()
-{
+int main() {
+    printf("\nFirst Fit Algorithm\n");
     
-    printf("\n First Fit Algorithm");
-    printf("\n");
+    // Input the number of memory blocks
     printf("Enter the number of Blocks of Memory available: ");
-    scanf("%d",&n);
-    printf("\t\t\blk enter the size for %d blocks\n",n);
-    for(i=0;i<n;i++)
-    {
-        printf("enter the size for %d block \t",i);
-        scanf("%d",&s[i].size);
+    scanf("%d", &n);
+    
+    // Input the size for each block
+    printf("Enter the size for %d blocks:\n", n);
+    for(int i = 0; i < n; i++) {
+        printf("Block %d size: ", i);
+        scanf("%d", &s[i].size);
+        s[i].alloc = 0; // Initialize all blocks as not allocated
     }
-    printf("\n\t\t Enter the number of processes:\t");
-    scanf("%d",&np);
-    printf("enter the size of %d processors !\t",np);
-    printf("/n");
-    for(i=0;i<np;i++)
-    {
-        printf("enter the size of process %d\t",i);
-        scanf("\n%d",&p[i].ps);
+    
+    // Input the number of processes
+    printf("Enter the number of processes: ");
+    scanf("%d", &np);
+    
+    // Input the size of each process
+    printf("Enter the size for %d processes:\n", np);
+    for(int i = 0; i < np; i++) {
+        printf("Process %d size: ", i);
+        scanf("%d", &p[i].ps);
+        p[i].flag = 0; // Initialize all processes as not allocated
     }
-    printf("\n\t\t Allocation of blocks using first fit is as follows\n");
-    printf("\n\t\t process \t process size\t blocks\n");
-    for(i=0;i<np;i++)
-    {
-        for(j=0;j<n;j++)
-        {
-            if(p[i].flag!=1)
-            {
-                if(p[i].flag!=1)
-                {
-                    if(p[i].ps<=s[j].size)
-                    {
-                        if(!s[j].alloc)
-                        {
-                            p[i].flag=1;
-                            s[j].alloc=1;
-                            printf("\n\t\t %d\t\t\t%d\t%d\t",i,p[i].ps,s[j].size);
-                        }
-                    }
-                }
+    
+    printf("\nAllocation of blocks using first fit is as follows\n");
+    printf("Process\tProcess Size\tBlock Size\n");
+    
+    // Allocation using First Fit
+    for(int i = 0; i < np; i++) {
+        for(int j = 0; j < n; j++) {
+            if(p[i].flag != 1 && p[i].ps <= s[j].size && !s[j].alloc) {
+                p[i].flag = 1;
+                s[j].alloc = 1;
+                printf("P%d\t%d\t\t%d\n", i, p[i].ps, s[j].size);
+                break; // Move to the next process after allocation
             }
         }
     }
-    for(i=0;i<np;i++)
-    {
-        if(p[i].flag!=1)
-            printf("sorry !!!!!!!process %d must wait as there is no sufficient memory",i);
+    // Check for processes that couldn't be allocated
+    for(int i = 0; i < np; i++) {
+        if(p[i].flag != 1) {
+            printf("Process %d must wait as there is no sufficient memory\n", i);
+        }
     }
+    return 0;
 }
