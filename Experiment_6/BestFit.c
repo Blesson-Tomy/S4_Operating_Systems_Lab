@@ -1,46 +1,62 @@
-#include<stdio.h>
-#define MAX 20
-int main()
-{
-    int bsize[MAX],fsize[MAX],nb,nf;
-    int temp,low=10000;
-    static int bflag[MAX],fflag[MAX];
-    int i,j;
-    printf("\n enter the number of blocks");
-    scanf("%d",&nb);
-    for(i=1;i<=nb;i++)
-    {
-        printf("Enter the size of memory block % d",i);
-        scanf("%d", &bsize[i]);
+#include <stdio.h>
+struct process {
+    int p;
+    int flag;
+} ps[10];
+struct size {
+    int size;
+    int alloc;
+} bs[10];
+
+int main() {
+    int np, nb;
+
+    printf("Enter the number of processes: ");
+    scanf("%d", &np);
+
+    printf("Enter the size of processes:\n");
+    for (int i = 0; i < np; i++) {
+        printf("Process %d: ", i);
+        scanf("%d", &ps[i].p);
+        ps[i].flag = 0; // Initialize the flag as not allocated
     }
-    printf("\n enter the number of files");
-    scanf("%d",&nf);
-    for(i=1;i<=nf;i++)
-    {
-        printf("\n enetr the size of file %d",i);
-        scanf("%d",&fsize[i]);
+
+    printf("Enter the number of memory blocks: ");
+    scanf("%d", &nb);
+
+    printf("Enter the size of memory blocks:\n");
+    for (int i = 0; i < nb; i++) {
+        printf("Block %d: ", i);
+        scanf("%d", &bs[i].size);
+        bs[i].alloc = 0; // Initialize the alloc as not allocated
     }
-    for(i=1;i<=nf;i++)
+    printf("\nBest Fit:\n");
+    printf("Process ID\tProcess Size\tBlock Size\n");
+    // Best Fit allocation
+    for (int i = 0; i < np; i++) 
     {
-        for(j=1;j<=nb;j++)
+        int bestIndex = -1;
+        for (int j = 0; j < nb; j++) 
         {
-            if(bflag[j]!=1)
+            if (bs[j].alloc == 0 && ps[i].p <= bs[j].size) 
             {
-                temp=bsize[j]-fsize[i];
-                if(temp>=0)
+                if (bestIndex == -1 || bs[j].size < bs[bestIndex].size) 
                 {
-                    if(low>temp)
-                    {
-                        fflag[i]=j;
-                        low=temp;
-                    }
+                    bestIndex = j;
                 }
             }
         }
-        bflag[fflag[i]]=1;
-        low=10000;
+        if (bestIndex != -1) {
+            ps[i].flag = 1; // Mark the process as allocated
+            bs[bestIndex].alloc = 1; // Mark the block as allocated
+            printf("%d\t\t%d\t\t%d\n", i, ps[i].p, bs[bestIndex].size);
+        }
     }
-    printf("\n file no \t file.size\t block no \t block size");
-    for(i=1;i<=nf;i++)
-        printf("\n \n %d \t\t%d\t\t%d\t\t%d",i,fsize[i],fflag[i],bsize[fflag[i]]);
+    // Check for processes that couldn't be allocated
+    for (int i = 0; i < np; i++) {
+        if (ps[i].flag != 1) {
+            printf("Process %d is not successfully allocated.\n", i);
+        }
+    }
+    return 0;
 }
