@@ -1,4 +1,4 @@
-### S4_Operating_Systems_Lab
+# S4_Operating_Systems_Lab
 
 ## BASIC LINUX COMMANDS
 
