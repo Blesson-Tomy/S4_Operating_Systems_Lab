@@ -1,5 +1,6 @@
+### S4_Operating_Systems_Lab
 
-# BASIC LINUX COMMANDS
+## BASIC LINUX COMMANDS
 
 ## Aim: To implement basic linux commands
 
